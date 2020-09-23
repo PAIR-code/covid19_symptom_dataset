@@ -1,0 +1,7 @@
+{
+  "nBuckets": 9,
+  "populationScale": 1000,
+  "minValidCounties": 1790,
+  "logDomain": [0.5, 2],
+  "numWeeks": 156
+}
