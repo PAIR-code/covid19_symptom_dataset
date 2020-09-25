@@ -44,6 +44,7 @@ window.params = makeParams()
 if (!params.get('symptom')) params.set('symptom', 'fever')
 
 var dataPath = params.get('local-data') ? 'data-parsed/combined' : 'https://storage.googleapis.com/uncertainty-over-space/combined'
+var cachebust = 'cachebust=12'
 
 
 var logScale = d3.scaleLog().clamp(1)
@@ -64,7 +65,7 @@ if (window.resCache){
 } else{
   d3.loadData(
     'third_party/topojson/us.json', 
-    `${dataPath}/${params.get('symptom')}.json?cachebust=11`,
+    `${dataPath}/${params.get('symptom')}.json?${cachebust}`,
     `${dataPath}/__symptoms-timeline-list.json`,
     'third_party/2016-us-election/county_pop.csv', 
     'config.json', 
@@ -96,7 +97,7 @@ function fmtData(){
 
 async function initTop(forceMap=0){
   if (params.get('symptom') != symptom.slug){
-    window.symptom = await (await fetch(`${dataPath}/${params.get('symptom')}.json?cachebust=11`)).json()
+    window.symptom = await (await fetch(`${dataPath}/${params.get('symptom')}.json?${cachebust}`)).json()
   }
 
   symptom.fipsLookup = Object.fromEntries(symptom.counties.map(d => [d.fips, d.vals]))
@@ -470,7 +471,7 @@ function initLegend(){
 
 async function initList(){
   if (!window.symptomsTimeline){
-    window.symptomsTimeline = await (await fetch(`${dataPath}/__symptoms-timeline.json?cachebust=11`)).json()
+    window.symptomsTimeline = await (await fetch(`${dataPath}/__symptoms-timeline.json?${cachebust}`)).json()
   }
 
   var topSymptoms = symptomsTimeline.filter(d => d.numValidCounties > config.minValidCounties)
