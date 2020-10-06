@@ -6,7 +6,7 @@
 
 ```
 yarn
-bin/update-data.sh
+bin/update.sh
 ```
 
 ## Local preview
@@ -18,5 +18,3 @@ npx hot-server
 To view locally generated data, go to [localhost:3989/?local-data=true](http://localhost:3989/?local-data=true)
 
 **This is not an officially supported Google product**
-
-
