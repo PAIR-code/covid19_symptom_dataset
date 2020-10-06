@@ -9,9 +9,12 @@ var rawdir = __dirname + '/../data-raw'
 
 
 function cloneRepo(){
+  if (!fs.existsSync(rawdir)){
+    execSync(`mkdir ${rawdir}`)
+  }
   if (!fs.existsSync(rawdir + '/open-covid-19-data')){
     console.log('cloning repo')
-    execSync(`cd ${rawdir} && git clone git@github.com:google-research/open-covid-19-data.git`)
+    execSync(`cd ${rawdir} && git clone https://github.com/google-research/open-covid-19-data.git`)
   } else {
     console.log('pulling repo')
     execSync(`cd ${rawdir}/open-covid-19-data && git pull`)
@@ -37,5 +40,3 @@ async function downloadZips(){
   execSync(`cd ${zipdir} && unzip '*.zip'`)
 }
 downloadZips()
-
-
