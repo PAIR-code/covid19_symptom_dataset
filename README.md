@@ -1,6 +1,6 @@
 # Symptom Search Maps
 
-[County choropleths](https://pair-code.github.io/covid19_symptom_dataset) showing the [COVID-19 Search Trends symptoms dataset](https://github.com/google-research/open-covid-19-data/tree/master/data/exports/search_trends_symptoms_dataset) over time.
+[Visualizations](https://pair-code.github.io/covid19_symptom_dataset) showing the [COVID-19 Search Trends symptoms dataset](https://github.com/google-research/open-covid-19-data/tree/master/data/exports/search_trends_symptoms_dataset) over time.
 
 ## Update data
 

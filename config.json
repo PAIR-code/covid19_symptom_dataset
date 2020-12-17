@@ -3,5 +3,13 @@
   "populationScale": 1000,
   "minValidCounties": 1790,
   "logDomain": [0.5, 2],
-  "numWeeks": 156
+  "numWeeks": 102,
+  "countries": [
+    {"code": "AU", "name": "Australia"},
+    {"code": "GB", "name": "United Kingdom"},
+    {"code": "IE", "name": "Ireland"},
+    {"code": "NZ", "name": "New Zealand"},
+    {"code": "SG", "name": "Singapore"},
+    {"code": "US", "name": "United States"}
+  ]
 }
