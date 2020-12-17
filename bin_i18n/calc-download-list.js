@@ -17,7 +17,8 @@ limitations under the License.
 var {_, d3, jp, fs, glob, io} = require('scrape-stl')
 
 var out = []
-glob.sync(__dirname + '/../data-raw/i18n/2020/country/daily/*.csv').forEach(path => {
+glob.sync(__dirname + '/../data-raw/i18n/2020/country/weekly/*.csv').forEach((path, i) => {
+  // if (i) return 
   console.log(path)
 
   var data = io.readDataSync(path)
@@ -28,6 +29,21 @@ glob.sync(__dirname + '/../data-raw/i18n/2020/country/daily/*.csv').forEach(path
       out.push({country_region, country_region_code, sub_region_1})
     })
 })
+
+var isValidRegion = {'': true}
+glob.sync(__dirname + '/../data-raw/i18n/2020/sub_region_1/weekly/*.csv').forEach(path => {
+  var region = path
+    .split('2020/sub_region_1/weekly/')[1]
+    .split('_weekly_symptoms_dataset.csv')[0]
+    .slice(8)
+    .split('_').join(' ')
+
+  isValidRegion[region] = true
+})
+
+out = out.filter(d => isValidRegion[d.sub_region_1])
+
+// console.log(out)
 
 io.writeDataSync(__dirname + '/../data-parsed/i18n/download-manifest.csv', out)
 
