@@ -57,7 +57,8 @@ config.countries.forEach(({code, name}, i) => {
 
     var symptom = key.split(':')[1]
     var slug = slugify(symptom).toLowerCase()
-    io.writeDataSync(outdir + slug + '.json', {symptom, slug, dates, regions, countryCode: code, countryName: name})
+    var date = (new Date()).toISOString()
+    io.writeDataSync(outdir + slug + '.json', {symptom, slug, dates, regions, countryCode: code, countryName: name, date})
 
     return {symptom, slug}
   })
