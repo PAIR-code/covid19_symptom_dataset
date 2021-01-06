@@ -20,7 +20,7 @@ jobs:
         uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
         with:
           service_account_key: ${{ secrets.GCLOUD_API_KEYFILE }}
-          export_default_credentials: true
+          export_default_credentials: false
       - run: gcloud info
       - name: Update GCS data
         run: |
