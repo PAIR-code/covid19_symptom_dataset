@@ -43,8 +43,8 @@ d3.loadData(`${window.dataPath}/download-manifest.csv`, (err, res) => {
   })  
 
 
-  var years = [2017, 2018, 2019, 2020]
-  years.active = '2020'
+  var years = [2017, 2018, 2019, 2020, 2021]
+  years.active = '2021'
 
   var yearsSel = d3.select('.year.buttons').html('')
     .appendMany('div.button', years)
