@@ -91,7 +91,7 @@ d3.loadData(`${window.dataPath}/download-manifest.csv`, (err, res) => {
     .append('span').text('Subregions')
 
   expandCountrySel
-    .appendMany('a.region-list.row', d => _.sortBy(d, d => d.sub_region_1).filter(d => d.sub_region_1 && d.sub_region_1 != 'Australian Capital Territory'))
+    .appendMany('a.region-list.row', d => _.sortBy(d, d => d.sub_region_1).filter(d => d.sub_region_1))
     .append('span')
     .text(d => d.sub_region_1)
 

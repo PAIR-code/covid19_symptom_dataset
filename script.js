@@ -26,7 +26,7 @@ function makeParams(){
 
   rv.get = key => {
     var str = searchParams.get(key)
-    if (key == 'symptom' && !symptomSlugs.includes(str)) str = 'fever'
+    if (key == 'symptom' && !symptomSlugs.includes(str)) str = 'fatigue'
 
     return str
   }
@@ -41,7 +41,7 @@ function makeParams(){
   return rv
 }
 window.params = makeParams()
-if (!params.get('symptom')) params.set('symptom', 'fever')
+if (!params.get('symptom')) params.set('symptom', 'fatigue')
 
 window.dataPath = params.get('local-data') ? 
   'data-parsed/i18n' : params.get('dense-map') ? 
@@ -118,7 +118,7 @@ window.initSparse = async function(){
   window.symptoms = await util.json(`${dataPath}/countries/AU/symptoms/__symptoms.json`)
 
   window.legend = await initSparseLegend()
-  await initSparseTop()
+  window.topLines = await initSparseTop()
 }
 
 window.init = function(){
