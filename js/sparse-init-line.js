@@ -16,7 +16,7 @@ limitations under the License.
 
 window.initSparseLine = async function(symptom, sel, addTitle){
   var c = d3.conventions({
-    sel: sel.append('div'),
+    sel: sel.append('div.line-chart'),
     height: 200,
     margin: {left: 30, right: 10}
   })
@@ -41,6 +41,9 @@ window.initSparseLine = async function(symptom, sel, addTitle){
   c.x.interpolate(d3.interpolateRound).clamp(1)
   c.y.interpolate(d3.interpolateRound)
 
+
+  var logY = d3.scaleLog().domain([.5, 2]).range(c.y.range()).clamp(1)
+
   var dayTicks = d3.nestBy(
     symptom.dates.map((d, i) => ({d, i})), 
     d => d.d.split('-').slice(0, 2).join('-'))
@@ -52,10 +55,18 @@ window.initSparseLine = async function(symptom, sel, addTitle){
     .tickFormat(d => symptom.dates[d].split('-').slice(0, 2).join('-'))
     .tickSize(c.height)
 
-  c.yAxis.ticks(3).tickSize(c.width).tickFormat((d, i) => i == 0 ? '' : d + '×')
+  c.yAxis
+    .ticks(3)
+    .tickSize(c.width).tickFormat((d, i) => d == 0 ? '' : d + '×')
+  
+  var logAxis = d3.axisLeft(logY)
+    .tickValues([1/2, 1, 2])
+    .tickSize(c.width).tickFormat((d, i) => d + '×')
 
   d3.drawAxis(c)
   var xAxisSel = c.svg.select('.x').translate(0, 0)
+  xAxisSel.selectAll('text').at({dy: 11})
+
   var yAxisSel = c.svg.select('.y').translate(c.width, 0)
   
 
@@ -79,25 +90,8 @@ window.initSparseLine = async function(symptom, sel, addTitle){
       opacity: symptom.regions.length < 20 ? .3 : symptom.regions.length < 60 ? .1 : .07,
       fill: 'none'
     })
-    .on('mouseover', d => {
-      d3.selectAll('.region-line')
-        .classed('active', false)
-        .filter(e => e.region == d.region)
-        .classed('active', 1)
-        .raise()
-
-      d3.selectAll('.hover-text')
-        .text(d.region)
-        .classed('country-hover', d.region == symptom.countryName)
-    })
-    .on('mouseout', d => {
-      d3.selectAll('.region-line')
-        .classed('active', false)
-
-      d3.selectAll('.hover-text')
-        .text('')
-
-    })
+    .on('mouseout', () => legend.setActiveRegion({}))
+    .on('mouseover', legend.setActiveRegion)
   
   pathSel
     .filter(d => d.region == symptom.countryName)
@@ -109,7 +103,8 @@ window.initSparseLine = async function(symptom, sel, addTitle){
   var botTickSel = c.svg.select('.x').append('g.bot-tick')
   botTickSel.append('path').at({d: `M 0 0 V ${-c.height}`, stroke: '#FFF'})
   var botTextSel = botTickSel.append('text')
-    .at({y: 14, dy: '.71em'})
+    .at({y: 16, dy: '.71em'})
+
   c.svg
     .on('mousemove', function(){
       var index = Math.round(c.x.invert(d3.mouse(this)[0]))
@@ -124,7 +119,22 @@ window.initSparseLine = async function(symptom, sel, addTitle){
     })
 
 
+  c.sel.datum({setLog}) 
 
+  function setLog(isLog, dur=1000){
+    yAxisSel
+      .transition().duration(dur)
+      .call(isLog ? logAxis : c.yAxis)
+
+    line.y(isLog ? logY : c.y)
+    pathSel
+      .transition().duration(dur)
+      .at({d: d => line(d.changeVals)})
+
+    window.state.isLog = isLog
+  }
+
+  if (window.state.isLog == true) setLog(1, 0)
 }
 
 if (window.init) window.init()

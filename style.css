@@ -641,7 +641,7 @@ select{
 
 
 
-.sparse .legend, .symptom-dropdown, .description-symptoms,.description-symptom-name{
+.sparse .legend, .symptom-dropdown, .description-symptoms,.description-symptom-name, .bot-options{
   font-family: Google Sans;
   font-size: 22px;
 }
@@ -693,4 +693,19 @@ span.key.country-wide:before{
 .is-sg span.key.country-wide{
   opacity: 1;
   /*display: inline-block;*/
+}
+
+
+
+.bot-options{
+  text-align: center;
+}
+
+.bot-options > *{
+  display: inline-block;
+}
+
+.bot-options .buttons > div{
+  font-size: 22px;
+  width: 140px
 }

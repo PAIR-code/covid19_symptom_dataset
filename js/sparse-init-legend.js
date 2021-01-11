@@ -50,6 +50,50 @@ window.initSparseLegend = async function(){
 
 
 
+  function updateRegionSelect(){
+    d3.select('.region-select').html('')
+      .append('select')
+      .st({width: 300, margin: 10, padding: 10, marginLeft: 20})
+      .on('change', function(){
+        setActiveRegion({region: this.value})
+        if (window.gtag) gtag('event', 'select-click-region', {event_label: this.value})
+      })
+      .appendMany('option', [{region: 'Select Region'}].concat(symptom.regions))
+      .text(d => d.region)
+      .at({value: d => d.region})
+  }
+
+  function setActiveRegion(d){
+    if (d.region == '') d.region = 'Select Region'
+
+    d3.selectAll('.region-line')
+      .classed('active', false)
+      .filter(e => e.region == d.region)
+      .classed('active', 1)
+      .raise()
+
+    d3.selectAll('.hover-text')
+      .text(d.region == 'Select Region' ? '' : d.region)
+      .classed('country-hover', d.region == symptom.countryName)
+
+      d3.selectAll('.region-select option')
+        .at({selected: null})
+        .filter(e => d.region == e.region)
+        .at({selected: 'selected'})
+  }
+
+
+  var scaleButtonSel = d3.selectAll('.bot-options .button')
+    .classed('active', (d, i) => i == window.state.isLog)
+    .on('click', (d, i) => {
+      d3.selectAll('.line-chart').each(d => d.setLog(i))
+      scaleButtonSel.classed('active', (d, i) => i == window.state.isLog)
+    })
+
+
+
+
+
   var symptomSelectSel = d3.select('.symptom-dropdown').html('')
     .st({margin: '0px auto'}).append('div')
     .html('<span style="white-space:nowrap">Related searches for</span>')
@@ -110,7 +154,7 @@ window.initSparseLegend = async function(){
   
 
 
-  return {setSymptom}
+  return {setSymptom, updateRegionSelect, setActiveRegion}
 }
 
 

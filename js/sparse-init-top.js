@@ -46,6 +46,8 @@ window.initSparseTop = async function(){
 
   initSparseLine(symptom, d3.select('.line-single').html('').st({width}), 0)
 
+  legend.updateRegionSelect()
+
 
   function decorateSymptom(symptom){
     var zeroVals = symptom.regions[0].vals.map(d => 0)

@@ -60,6 +60,7 @@ var colorScaleRaw = d => d3.interpolatePiYG(1 - d/nBuckets)
 window.state = {
   isGif: !!params.get('is-gif'),
   isDense: 0,
+  isLog: 0,
 }
 d3.select('body').classed('is-gif', state.isGif)
 
