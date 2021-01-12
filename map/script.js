@@ -97,6 +97,7 @@ function fmtData(){
 
 async function initTop(forceMap=0){
   if (params.get('symptom') != symptom.slug){
+    
     window.symptom = await (await fetch(`${dataPath}/${params.get('symptom')}.json?${cachebust}`)).json()
   }
 
