@@ -12,7 +12,7 @@ bin/update.sh
 ## Local preview
 
 ```
-npx hot-server --ignore=data-raw|data-parsed
+npx hot-server --ignore="data-raw|data-parsed"
 ```
 
 To view locally generated data, go to [localhost:3989/?local-data=true](http://localhost:3989/?local-data=true)

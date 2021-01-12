@@ -1,8 +1,11 @@
 #!/bin/bash
 cd "$(dirname "$0")"
 
-# download files from github
-node download.js
+# make folders
+mkdir -p ../data-raw/i18n/
+
+# download files from GCS
+gsutil -m -q rsync -d -r gs://gcs-public-data---symptom-search ../data-raw/i18n/
 
 # split into state-symptom files and merge daily w/ weekly data
 node parse-raw.js
@@ -15,4 +18,4 @@ node combine-states.js
 node timeline.js
 
 # upload to GCS
-gsutil -m rsync -r ../data-parsed/combined gs://uncertainty-over-space/combined
+gsutil -m -q rsync -r ../data-parsed/combined gs://uncertainty-over-space/combined

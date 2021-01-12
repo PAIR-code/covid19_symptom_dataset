@@ -18,9 +18,7 @@ var {_, d3, jp, fs, glob, io} = require('scrape-stl')
 var slugify = require('slugify')
 var states = io.readDataSync(__dirname + '/states.json')
 
-var rawZipFiles = glob.sync(__dirname + `/../data-raw/zips/**/*_symptoms_dataset.csv`)
-var rawGitFiles = glob.sync(__dirname + `/../data-raw/open-covid-19-data/data/exports/**/*_symptoms_dataset.csv`)
-var rawFiles = rawZipFiles.concat(rawGitFiles)
+var rawFiles = glob.sync(__dirname + `/../data-raw/i18n/**/*_symptoms_dataset.csv`)
 
 states.forEach(parseState)
 function parseState(state, i){
@@ -31,17 +29,21 @@ function parseState(state, i){
 
   var rawStateFiles = rawFiles.filter(d => d.includes('US_' + state))
 
-  parseInterval('daily')
   parseInterval('weekly')
+  parseInterval('daily')
 
   function parseInterval(interval){
     var rawdata = []
-    rawStateFiles.filter(d => d.includes(`${interval}_symptoms_dataset.csv`))
+    rawStateFiles
+      .filter(d => d.includes(`${interval}_symptoms_dataset.csv`))
+      .filter(d => !d.includes('i18n/Counties_'))
       .forEach((path, i) => {
+        console.log(path)
         rawdata = rawdata.concat(io.readDataSync(path))
       })
 
     var dates = _.uniq(rawdata.map(d => d.date)).sort()
+    console.log(dates.slice(-10))
     var date2index = Object.fromEntries(dates.map((d, i) => [d, i]))
 
     var byFips = jp.nestBy(rawdata, d => d.sub_region_2_code)
