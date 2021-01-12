@@ -14,7 +14,8 @@ limitations under the License.
 ==============================================================================*/
 
 
-d3.loadData(`${window.dataPath}/download-manifest.csv`, (err, res) => {
+// d3.loadData(`${window.dataPath}/download-manifest.csv`, (err, res) => {
+d3.loadData(`https://storage.googleapis.com/uncertainty-over-space/ssd_i18n/download-manifest.csv`, (err, res) => {
   window.downloadFiles = res[0]
     .filter(d => d.sub_region_1 == '' || !['Singapore', 'New Zealand', 'Ireland'].includes(d.country_region))
 

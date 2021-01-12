@@ -1,6 +1,3 @@
-
-
-
 <!--
 @license
 Copyright 2020 Google. All Rights Reserved.
@@ -24,13 +21,13 @@ limitations under the License.
 <title>Explore COVID-19 Symptoms Search Trends</title>
 <meta property='og:title' content='Explore COVID-19 Symptoms Search Trends'>
 <meta property='og:url' content='https://pair-code.github.io/covid19_symptom_dataset'>
-<meta property='og:image' content='https://i.imgur.com/y6Opbxb.png'>
+<meta property='og:image' content='https://i.imgur.com/uUq9Jp1.png'>
 <meta name='twitter:card' content='summary_large_image'>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="glue/glue.min.css">
+<link rel="stylesheet" href="../glue/glue.min.css">
 <link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="js/download.css">
+<link rel="stylesheet" href="../js/download.css">
 
 <link href="//fonts.googleapis.com/css?family=Roboto:100,300,400,500,700|Google+Sans:400,500|Product+Sans:400&amp;lang=en" rel="stylesheet">
 
@@ -48,7 +45,7 @@ limitations under the License.
   <div class="glue-header__logo-container ">
     <a href='https://www.google.com/' style=''>
       <svg role="img" aria-hidden="true" class="glue-header__logo-svg">
-        <use xlink:href="glue/glue-icons.svg#google-color-logo"></use>
+        <use xlink:href="../glue/glue-icons.svg#google-color-logo"></use>
       </svg>
     </a>
   </div>
@@ -81,81 +78,43 @@ limitations under the License.
 <p id='download'>To use or download this data, you must agree to the Google <a href='https://policies.google.com/terms'>Terms of Service.</a>
 
 <p>You can start working with the dataset by downloading it from this page, running queries in Google Cloud’s <a href='https://pantheon.corp.google.com/marketplace/product/bigquery-public-datasets/covid19-search-trends'>COVID-19 Public Dataset Program</a>, or analyzing the data alongside other covariates in the <a href='https://github.com/GoogleCloudPlatform/covid-19-open-data'>COVID-19 Open-Data repository</a>. For more information about the dataset, how we generate it and preserve privacy, read the <a href='https://storage.googleapis.com/gcp-public-data-symptom-search/COVID-19%20Search%20Trends%20symptoms%20dataset%20documentation%20.pdf'>data documentation</a>.
-
   
 
+<div class='legend'></div>
+<div class='map'></div>
+<div class='timeline'></div>
+
+<p class="description">On this map,
+  <span style="background: rgb(226, 131, 183);padding: 2px;">purple counties</span>  
+  had more searches related to
+  
+  “<span class='description-symptom-name'></span>”
+  during the week of 
+  <span class='description-date'></span> than typical for the county. Fewer related searches took places in
+  <span style="background: rgb(140, 196, 83);padding: 2px;">green counties</span>. 
+  Some counties have <span style="background: #eee;padding: 2px">insufficient data</span> to map.
+</p>
+
+<p>To make trends in Google searches comparable between counties, we divided the normalized search volume for a given symptom in a given county during a given week by the median search volume for that county-symptom pair. To prevent the seasonal distribution from shifting as more data is released, only the first three years of data are used to calculate the median. 
 
 
-<div class='sparse'>
-
-  <div class='legend'></div>
-  <div class='line line-list'></div>
-  <div class='bot-options'>
-    <div class='region-select'></div>
-    <span> </span>
-    <div class='scale buttons'>
-      <div class='button'>Linear Scale</div>
-      <div class='button'>Log Scale</div>
-    </div>
-  </div>
-
-  <p>To make trends in Google searches comparable between regions, we show the ratio between the normalized search volume for a given symptom in a given region during a given week and the median search volume for that region-symptom pair. To prevent the seasonal distribution from shifting as more data is released, only the first two years of data are used to calculate the median. 
+<!-- <p>To download or use the data, you must agree to the Google <a href="https://policies.google.com/terms">Terms of Service</a>. -->
 
 
-  <div class='symptom-dropdown'></div>
-
-  <div class='line-single-container'>
-    <div class='line line-single'></div>
-  </div>
-</div>
 
 
-<div class='dense-viz'>
-  <div class='map'></div>
-  <div class='timeline'></div>
+<h3>Searches Over Time</h3>
 
-  <p class="description">On this map,
-    <span style="background: rgb(226, 131, 183);padding: 2px;">purple counties</span>  
-    had more searches related to
-    
-    “<span class='description-symptom-name'></span>”
-    during the week of 
-    <span class='description-date'></span> than typical for the county. Fewer related searches took places in
-    <span style="background: rgb(140, 196, 83);padding: 2px;">green counties</span>. 
-    Some counties have <span style="background: #eee;padding: 2px">insufficient data</span> to map.
-  </p>
+<p>Some of the most common symptoms are listed below with a chart showing the distribution of search frequency, aggregated over all counties and weighted by population. Click on one of them to examine geographic patterns on the map. 
 
-  <p>To make trends in Google searches comparable between counties, we divided the normalized search volume for a given symptom in a given county during a given week by the median search volume for that county-symptom pair. To prevent the seasonal distribution from shifting as more data is released, only the first three years of data are used to calculate the median. 
+<div class='symptom-list'></div>
 
+<script src='../third_party/d3-jetpack/d3v4+jetpack+lodash.js'></script>
+<script src='../third_party/topojson/topojson-client.js'></script>
+<script src='../third_party/d3-scale-chromatic/scale-chromatic.js'></script>
 
-  <h3>Searches Over Time</h3>
-
-  <p>Some of the most common symptoms are listed below with a chart showing the distribution of search frequency, aggregated over all counties and weighted by population. Click on one of them to examine geographic patterns on the map. 
-
-  <div class='symptom-list'></div>
-</div>
-
-<script src='third_party/d3-jetpack/d3v4+jetpack+lodash.js'></script>
-<script src='third_party/topojson/topojson-client.js'></script>
-<script src='third_party/d3-scale-chromatic/scale-chromatic.js'></script>
-
-<script src='js/init-list.js'></script>
-<script src='js/init-map.js'></script>
-<script src='js/init-timeline.js'></script>
-<script src='js/init-legend.js'></script>
-<script src='js/init-map-old.js'></script>
-<script src='js/init-top.js'></script>
-
-<script src='js/sparse-init-top.js'></script>
-<script src='js/sparse-init-line.js'></script>
-<script src='js/sparse-init-legend.js'></script>
-
-<script src='js/tooltip-chart.js'></script>
-<script src='js/util.js'></script>
-
-
-<script src='script.js?cache-bust=14'></script>
-<script src='js/init-download.js'></script>
+<script src='script.js'></script>
+<script src='../js/init-download.js'></script>
 
 
 
@@ -172,7 +131,7 @@ limitations under the License.
     <div class="glue-footer__logo">
       <a href="https://www.google.com" title="Google">
         <svg role="img" aria-hidden="true" class="glue-footer__logo-img">
-          <use xlink:href="glue/glue-icons.svg#google-solid-logo"></use>
+          <use xlink:href="../glue/glue-icons.svg#google-solid-logo"></use>
         </svg>
       </a>
     </div>
@@ -193,12 +152,6 @@ limitations under the License.
       <li class="glue-footer__global-links-list-item">
         <a class="glue-footer__link" href="https://storage.googleapis.com/gcp-public-data-symptom-search/COVID-19%20Search%20Trends%20symptoms%20dataset%20documentation%20.pdf">
           Documentation
-        </a>
-      </li>
-
-      <li class="glue-footer__global-links-list-item">
-        <a class="glue-footer__link" href="mailto:covid-19-search-trends-feedback@google.com ">
-          Feedback
         </a>
       </li>
 
