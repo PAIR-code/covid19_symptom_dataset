@@ -423,6 +423,12 @@ span.key.country-wide:before{
   /*display: inline-block;*/
 }
 
+.is-sg .region-select{
+  /*display: none;*/
+  width: 0px;
+  opacity: 0;
+  pointer-events: none;
+}
 
 
 .bot-options{

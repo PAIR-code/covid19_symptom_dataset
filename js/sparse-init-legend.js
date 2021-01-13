@@ -58,7 +58,7 @@ window.initSparseLegend = async function(){
         setActiveRegion({region: this.value})
         if (window.gtag) gtag('event', 'select-click-region', {event_label: this.value})
       })
-      .appendMany('option', [{region: 'Select Region'}].concat(symptom.regions.slice(1)))
+      .appendMany('option', [{region: 'Select Subregion'}].concat(symptom.regions.slice(1)))
       .text(d => d.region)
       .at({value: d => d.region})
   }
