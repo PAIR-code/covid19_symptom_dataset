@@ -47,7 +47,7 @@ window.initSparseLine = async function(symptom, sel, addTitle){
   var dayTicks = d3.nestBy(
     symptom.dates.map((d, i) => ({d, i})), 
     d => d.d.split('-').slice(0, 2).join('-'))
-    .filter(d => ['2018-01', '2018-07', '2019-01', '2019-07', '2020-01', '2020-07'].includes(d.key))
+    .filter(d => ['2018-01', '2018-07', '2019-01', '2019-07', '2020-01', '2020-07', '2021-01', '2021-07'].includes(d.key))
     .map(d => d[0].i)
 
   c.xAxis

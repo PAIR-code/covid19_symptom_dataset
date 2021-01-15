@@ -28,8 +28,6 @@ d3.cross(states, symptoms).forEach(mergeSymptom)
 
 
 function mergeSymptom([state, symptom], i){
-  console.log(state, symptom.slug)
-
   var outdir = __dirname + `/../data-parsed/states/${state}/`
 
   var weekly = io.readDataSync(outdir + 'weekly_' + symptom.slug + '.json')

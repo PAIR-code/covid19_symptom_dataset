@@ -60,8 +60,6 @@ config.countries.forEach(({code, name}, i) => {
     var date = (new Date()).toISOString()
     io.writeDataSync(outdir + slug + '.json', {symptom, slug, dates, regions, countryCode: code, countryName: name, date})
 
-    if (code == 'SG') console.log(date)
-
     return {symptom, slug}
   })
 
