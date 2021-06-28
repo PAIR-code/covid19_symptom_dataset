@@ -322,20 +322,20 @@ function initTimeline(){
 
   var bw = c.x(1)
   var daySel = c.svg.appendMany('g', byDay)
-    .translate((d, i) => c.x(i) - bw/2 , 0)
+    .translate((d, i) => Math.round(c.x(i) - bw/2) , 0)
 
   daySel.appendMany('rect', d => d.buckets)
     .at({
       y: d => c.y(d.prev),
       height: d => c.y(d.post) - c.y(d.prev), 
-      width: (d, i) => c.x(d.day.i + 1) - c.x(d.day.i) - (isMobile ? 0 : .5),
+      width: (d, i) => c.x(d.day.i + 1) - c.x(d.day.i) ,
       fill: d => d.key == -1 ? '#eee' : d3.interpolatePiYG(1 - d.key/nBuckets),
       prev: d => d.prev,
       pop: d => d.pop,
     })
 
   d3.nestBy(byDay, d => d.dateStr.split('-').slice(0, 2).join('-'))
-    .filter(d => ['2017-08', '2018-01', '2018-07', '2019-01', '2019-07', '2020-01', '2020-07', '2021-01', '2021-07'].includes(d.key))
+    .filter(d => ['2017-08', '2018-01', '2018-07', '2019-01', '2019-07', '2020-01', '2020-07', '2021-01', '2021-07', '2022-01', '2022-07', '2023-01'].includes(d.key))
     .forEach(d => d[0].botText = d.key)
 
   var botAxisTickSel = daySel.filter(d => d.botText).append('g')
