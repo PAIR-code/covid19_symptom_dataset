@@ -17,7 +17,7 @@ jobs:
       - name: Install dependencies
         run: yarn
       - name: Setup gcloud and gsutil
-        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        uses: google-github-actions/github-actions/setup-gcloud@master
         with:
           service_account_key: ${{ secrets.GCLOUD_API_KEYFILE }}
           export_default_credentials: false
