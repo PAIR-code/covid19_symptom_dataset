@@ -23,5 +23,7 @@ jobs:
           export_default_credentials: false
       - run: gcloud info
       - name: Update GCS data
+        env:
+          NODE_OPTIONS: "--max-old-space-size=8192"
         run: |
           ./bin_i18n/update.sh && ./bin_map/update.sh
