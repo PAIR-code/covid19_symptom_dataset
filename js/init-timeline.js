@@ -61,7 +61,7 @@ window.initTimeline = async function(){
     })
 
   d3.nestBy(byDay, d => d.dateStr.split('-').slice(0, 2).join('-'))
-    .filter(d => ['2017-08', '2018-01', '2018-07', '2019-01', '2019-07', '2020-01', '2020-07'].includes(d.key))
+    .filter(d => ['2018-01', '2018-07', '2019-01', '2019-07', '2020-01', '2020-07'].includes(d.key))
     .forEach(d => d[0].botText = d.key)
 
   var botAxisTickSel = daySel.filter(d => d.botText).append('g')
