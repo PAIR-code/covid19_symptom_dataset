@@ -302,12 +302,16 @@ a:hover{
   text-decoration: underline;
 }
 
-@media (max-width: 400px){
+/*@media (max-width: 400px){*/
   .button-container > span{
     opacity: 0;
   }
-}
+/*}*/
 
+.year.buttons{
+  display: block;
+  margin-top: 10px;
+}
 
 
 

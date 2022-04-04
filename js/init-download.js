@@ -44,8 +44,8 @@ d3.loadData(`https://storage.googleapis.com/uncertainty-over-space/ssd_i18n/down
   })  
 
 
-  var years = [2017, 2018, 2019, 2020, 2021]
-  years.active = '2021'
+  var years = [2017, 2018, 2019, 2020, 2021, 2022]
+  years.active = '2022'
 
   var yearsSel = d3.select('.year.buttons').html('')
     .appendMany('div.button', years)
