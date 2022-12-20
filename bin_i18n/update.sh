@@ -14,4 +14,4 @@ node calc-download-list.js
 node parse.js
 
 # upload to GCS
-gsutil -m -q rsync -r ../data-parsed/i18n gs://uncertainty-over-space/ssd_i18n
+gcloud cp -r ../data-parsed/i18n gs://uncertainty-over-space/ssd_i18n

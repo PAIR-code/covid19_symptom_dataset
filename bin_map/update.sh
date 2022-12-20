@@ -18,4 +18,4 @@ node combine-states.js
 node timeline.js
 
 # upload to GCS
-gsutil -m -q rsync -r ../data-parsed/combined gs://uncertainty-over-space/combined
+gcloud cp -r ../data-parsed/combined gs://uncertainty-over-space/combined

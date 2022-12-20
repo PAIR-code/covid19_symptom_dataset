@@ -10,18 +10,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: '${{ secrets.GCLOUD_API_KEYFILE }}'
+
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v1'
+
+      - name: 'Use gcloud CLI'
+        run: 'gcloud info'
+
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:
           node-version: '12.x'
+
       - name: Install dependencies
         run: yarn
-      - name: Setup gcloud and gsutil
-        uses: 'google-github-actions/setup-gcloud@v0'
-        with:
-          service_account_key: ${{ secrets.GCLOUD_API_KEYFILE }}
-          export_default_credentials: false
-      - run: gcloud info
+
       - name: Update GCS data
         env:
           NODE_OPTIONS: "--max-old-space-size=8192"
