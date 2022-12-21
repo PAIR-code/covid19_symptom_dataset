@@ -5,7 +5,7 @@ cd "$(dirname "$0")"
 mkdir -p ../data-raw/i18n/
 
 # download files from GCS
-gcloud cp -r gs://gcs-public-data---symptom-search ../data-raw/i18n/
+gcloud storage cp -r gs://gcs-public-data---symptom-search ../data-raw/i18n/
 
 # split into state-symptom files and merge daily w/ weekly data
 node parse-raw.js
@@ -18,4 +18,4 @@ node combine-states.js
 node timeline.js
 
 # upload to GCS
-gcloud cp -r ../data-parsed/combined gs://uncertainty-over-space/combined
+gcloud storage cp -r ../data-parsed/combined gs://uncertainty-over-space/combined
