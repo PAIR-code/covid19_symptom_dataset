@@ -1,7 +1,7 @@
 on: [push]
 
-job:
-  job_id:
+jobs:
+  test-gcp:
     steps:
     - id: 'auth'
       uses: 'google-github-actions/auth@v1'
