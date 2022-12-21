@@ -1,3 +1,5 @@
+on: [push]
+
 job:
   job_id:
     steps:
