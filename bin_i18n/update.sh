@@ -6,7 +6,7 @@ mkdir -p ../data-raw/i18n/
 mkdir -p ../data-parsed/i18n/
 
 # download files from GCS
-gsutil -m -q rsync -d -r gs://gcs-public-data---symptom-search ../data-raw/i18n/
+gcloud cp -d -r gs://gcs-public-data---symptom-search ../data-raw/i18n/
 
 
 node calc-download-list.js

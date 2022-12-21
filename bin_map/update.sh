@@ -5,7 +5,7 @@ cd "$(dirname "$0")"
 mkdir -p ../data-raw/i18n/
 
 # download files from GCS
-gsutil -m -q rsync -d -r gs://gcs-public-data---symptom-search ../data-raw/i18n/
+gcloud cp -r gs://gcs-public-data---symptom-search ../data-raw/i18n/
 
 # split into state-symptom files and merge daily w/ weekly data
 node parse-raw.js
