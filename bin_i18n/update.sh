@@ -9,9 +9,9 @@ mkdir -p ../data-parsed/i18n/
 gsutil -m -q rsync -d -r gs://gcs-public-data---symptom-search ../data-raw/i18n/
 
 
-node calc-download-list.js
+node --max-old-space-size=8192 calc-download-list.js
 
-node parse.js
+node --max-old-space-size=8192 parse.js
 
 # upload to GCS
-gcloud cp -r ../data-parsed/i18n gs://uncertainty-over-space/ssd_i18n
+gcloud storage cp -r ../data-parsed/i18n gs://uncertainty-over-space/ssd_i18n

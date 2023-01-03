@@ -8,14 +8,14 @@ mkdir -p ../data-raw/i18n/
 gsutil -m -q rsync -d -r gs://gcs-public-data---symptom-search ../data-raw/i18n/
 
 # split into state-symptom files and merge daily w/ weekly data
-node parse-raw.js
-node daily-weekly-merge.js
+node --max-old-space-size=8192 parse-raw.js
+node --max-old-space-size=8192 daily-weekly-merge.js
 
 # combine state-symptom files into a single file for each symptom
-node combine-states.js
+node --max-old-space-size=8192 combine-states.js
 
 # generate symptom heatmap thumbnails
-node timeline.js
+node --max-old-space-size=8192 timeline.js
 
 # upload to GCS
-gcloud cp -r ../data-parsed/combined gs://uncertainty-over-space/combined
+gcloud storage cp -r ../data-parsed/combined gs://uncertainty-over-space/combined

@@ -44,7 +44,7 @@ window.params = makeParams()
 if (!params.get('symptom')) params.set('symptom', 'fever')
 
 var dataPath = params.get('local-data') ? '../data-parsed/combined' : 'https://storage.googleapis.com/uncertainty-over-space/combined'
-var cachebust = 'cachebust=15'
+var cachebust = 'cachebust=16'
 
 
 var logScale = d3.scaleLog().clamp(1)
