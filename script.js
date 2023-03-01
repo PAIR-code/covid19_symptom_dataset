@@ -47,7 +47,7 @@ window.dataPath = params.get('local-data') ?
   'data-parsed/i18n' : params.get('dense-map') ? 
   'https://storage.googleapis.com/uncertainty-over-space/combined' : 'https://storage.googleapis.com/uncertainty-over-space/ssd_i18n'
 
-window.cachebust = 'cachebust=14'
+window.cachebust = 'cachebust=16'
 window.isScreenshot = 0
 d3.select('body').classed('screenshot', isScreenshot)
 

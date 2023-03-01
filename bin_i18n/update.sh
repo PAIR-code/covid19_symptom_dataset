@@ -14,4 +14,7 @@ node --max-old-space-size=8192 calc-download-list.js
 node --max-old-space-size=8192 parse.js
 
 # upload to GCS
-gcloud storage cp -r ../data-parsed/i18n gs://uncertainty-over-space/ssd_i18n
+gsutil -m -q rsync -r ../data-parsed/i18n gs://uncertainty-over-space/ssd_i18n
+
+# TODO: Upgrade to gcloud API
+# gcloud storage cp -r ../data-parsed/i18n gs://uncertainty-over-space/ssd_i18n
