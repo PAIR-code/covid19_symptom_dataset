@@ -5,33 +5,33 @@ name: Update GCS data
 #     - cron: '0 18 * * *'
 #   workflow_dispatch:
         
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
 
-      - id: 'auth'
-        uses: 'google-github-actions/auth@v1'
-        with:
-          credentials_json: '${{ secrets.GCLOUD_API_KEYFILE }}'
+#       - id: 'auth'
+#         uses: 'google-github-actions/auth@v1'
+#         with:
+#           credentials_json: '${{ secrets.GCLOUD_API_KEYFILE }}'
 
-      - name: 'Set up Cloud SDK'
-        uses: 'google-github-actions/setup-gcloud@v1'
+#       - name: 'Set up Cloud SDK'
+#         uses: 'google-github-actions/setup-gcloud@v1'
 
-      - name: 'Use gcloud CLI'
-        run: 'gcloud info'
+#       - name: 'Use gcloud CLI'
+#         run: 'gcloud info'
 
-      - name: Use Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: '12.x'
+#       - name: Use Node.js
+#         uses: actions/setup-node@v1
+#         with:
+#           node-version: '12.x'
 
-      - name: Install dependencies
-        run: yarn
+#       - name: Install dependencies
+#         run: yarn
 
-      - name: Update GCS data
-        env:
-          NODE_OPTIONS: "--max-old-space-size=8192"
-        run: |
-          ./bin_i18n/update.sh && ./bin_map/update.sh
+#       - name: Update GCS data
+#         env:
+#           NODE_OPTIONS: "--max-old-space-size=8192"
+#         run: |
+#           ./bin_i18n/update.sh && ./bin_map/update.sh
